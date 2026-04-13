@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClearGov Technologies | Anti-Corruption Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">CG</div>
+          <div>
+            <h1>ClearGov</h1>
+            <p>Technologies</p>
+          </div>
+        </div>
+
+        <nav class="nav-links">
+          <button class="nav-link active" data-target="dashboard-view">Dashboard</button>
+          <button class="nav-link" data-target="reports-view">Reports</button>
+          <button class="nav-link" data-target="alerts-view">
+            Alerts
+            <span id="alertBadge" class="badge">0</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <p id="sessionUserLabel">Not signed in</p>
+          <button id="signOutBtn" class="btn btn-ghost">Sign out</button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <section class="topbar">
+          <div>
+            <h2>Government Oversight Intelligence</h2>
+            <p>Monitor spending, submit reports, and run AI risk scans.</p>
+          </div>
+          <button class="mobile-nav-toggle" id="mobileNavToggle">☰</button>
+        </section>
+
+        <section id="loginPanel" class="panel login-panel visible">
+          <div class="card login-card">
+            <h3>Welcome back</h3>
+            <p>Sign in to access the ClearGov command center.</p>
+            <form id="loginForm" class="stacked-form">
+              <label for="username">Username</label>
+              <input id="username" name="username" placeholder="e.g. analyst@cleargov" required />
+
+              <label for="password">Password</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                minlength="6"
+                placeholder="Minimum 6 characters"
+                required
+              />
+
+              <button class="btn btn-primary" type="submit">Sign in</button>
+            </form>
+            <small class="helper">Prototype login only. Credentials are kept in localStorage.</small>
+          </div>
+        </section>
+
+        <section id="appPanel" class="panel">
+          <section id="dashboard-view" class="view visible">
+            <div class="summary-grid">
+              <article class="card stat-card">
+                <h4>Total Budget</h4>
+                <p id="totalBudget">R 0</p>
+              </article>
+              <article class="card stat-card">
+                <h4>Departments Monitored</h4>
+                <p>12</p>
+              </article>
+              <article class="card stat-card">
+                <h4>Open Investigations</h4>
+                <p>7</p>
+              </article>
+              <article class="card stat-card">
+                <h4>Risk Index</h4>
+                <p class="risk">Moderate</p>
+              </article>
+            </div>
+
+            <div class="chart-grid">
+              <article class="card chart-card">
+                <div class="card-header">
+                  <h4>Spending Breakdown by Department</h4>
+                </div>
+                <canvas id="budgetPieChart" aria-label="Budget pie chart"></canvas>
+              </article>
+              <article class="card chart-card">
+                <div class="card-header">
+                  <h4>Monthly Expenditure Trend</h4>
+                </div>
+                <canvas id="spendingBarChart" aria-label="Spending bar chart"></canvas>
+              </article>
+            </div>
+
+            <article class="card activity-card">
+              <div class="card-header">
+                <h4>Recent Activity</h4>
+              </div>
+              <ul id="activityList" class="activity-list"></ul>
+            </article>
+          </section>
+
+          <section id="reports-view" class="view">
+            <article class="card">
+              <div class="card-header">
+                <h4>Anonymous Whistleblowing Portal</h4>
+              </div>
+              <form id="reportForm" class="stacked-form">
+                <label for="department">Department</label>
+                <input id="department" name="department" placeholder="e.g. Department of Transport" required />
+
+                <label for="description">Incident description</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="5"
+                  placeholder="Describe what happened, when, and who may be involved."
+                  required
+                ></textarea>
+
+                <label for="evidence">Attach evidence (optional)</label>
+                <input id="evidence" name="evidence" type="file" />
+
+                <button class="btn btn-primary" type="submit">Submit anonymous report</button>
+              </form>
+              <p id="reportConfirmation" class="confirmation"></p>
+            </article>
+
+            <article class="card history-card">
+              <div class="card-header">
+                <h4>Submitted Reports History</h4>
+              </div>
+              <ul id="reportHistory" class="history-list"></ul>
+            </article>
+          </section>
+
+          <section id="alerts-view" class="view">
+            <article class="card">
+              <div class="card-header">
+                <h4>AI Fraud Detection Center</h4>
+                <button id="runAiScanBtn" class="btn btn-primary">Run AI Scan</button>
+              </div>
+              <p class="helper">
+                Simulated model checks suspicious transactions, duplicate payments, and anomalies.
+              </p>
+              <div id="alertsContainer" class="alerts-grid"></div>
+            </article>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
